@@ -6,7 +6,7 @@ class Solution {
        Arrays.fill(firstupper,-1);
        for(int i=0;i<word.length();i++){
         char ch=word.charAt(i);
-        if(Character.isLowerCase(ch)){
+        if(ch>='a' && ch<='z'){
             lastlower[ch-'a']=i;
         }else{
             int idx=ch-'A';
