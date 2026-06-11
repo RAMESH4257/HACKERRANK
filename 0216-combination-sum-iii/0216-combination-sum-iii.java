@@ -10,6 +10,8 @@ class Solution {
             li.add(i);
             sub_sequences(sum-i,i+1,k,n,li,ans);
             li.remove(li.size()-1);
+        }else{
+            break;
         }
        }
     }
