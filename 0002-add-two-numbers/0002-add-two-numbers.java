@@ -1,54 +1,29 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+         ListNode t1=l1,t2=l2;
+         ListNode dummyhead=new ListNode(-1);
+         ListNode curr=dummyhead;
+         int carry=0;
+         while(t1!=null || t2!=null){
+            int sum=carry;
+            if(t1!=null) sum+=t1.val;
+            if(t2!=null) sum+=t2.val;
+            ListNode newnode=new ListNode(sum%10);
+            carry=sum/10;
+            curr.next=newnode;
+            curr=newnode;
+            if(t1!=null) t1=t1.next;
+            if(t2!=null) t2=t2.next;
 
-        ListNode dummy = new ListNode(0);
-        ListNode curr = dummy;
-
-        int carry = 0;
-
-        while(l1 != null || l2 != null || carry != 0){
-
-            int x = 0;
-            int y = 0;
-
-            if(l1 != null){
-                x = l1.val;
-            }else{
-                x = 0;
-            }
-
-            if(l2 != null){
-                y = l2.val;
-            }else{
-                y = 0;
-            }
-
-            int sum = x + y + carry;
-
-            carry = sum / 10;
-
-            curr.next = new ListNode(sum % 10);
-            curr = curr.next;
-
-            if(l1 != null){
-                l1 = l1.next;
-            }
-
-            if(l2 != null){
-                l2 = l2.next;
-            }
-        }
-
-        return dummy.next;
+         }
+         if(carry!=0){
+            ListNode newnode=new ListNode(carry);
+            curr.next=newnode;
+         }
+         return dummyhead.next;
     }
 }
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
