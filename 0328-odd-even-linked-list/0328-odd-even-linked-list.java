@@ -10,50 +10,39 @@
  */
 class Solution {
     public ListNode oddEvenList(ListNode head) {
-         if(head==null || head.next==null || head.next.next==null) return head;
-        List<Integer> ans=new ArrayList<>();
-        ListNode temp=head;
-        while(temp!=null && temp.next!=null){
-            ans.add(temp.val);
-            temp=temp.next.next;
+        if(head==null || head.next==null) return head;
+        ListNode odd=head,even=head.next,evenhead=even;
+        while(even!=null && even.next!=null){
+            odd.next=odd.next.next;
+            even.next=even.next.next;
+            odd=odd.next;
+            even=even.next;
         }
-        if(temp!=null) ans.add(temp.val);
-        temp=head.next;
-        while(temp!=null && temp.next!=null){
-            ans.add(temp.val);
-            temp=temp.next.next;
-        }
-        if(temp!=null) ans.add(temp.val);
-        temp=head;
-        int i=0;
-        while(temp!=null){
-            temp.val=ans.get(i);
-            i++;
-            temp=temp.next;
-        }
+        odd.next=evenhead;
         return head;
-        // if(head==null || head.next==null || head.next.next==null){
-        //     return head;
+        //  if(head==null || head.next==null || head.next.next==null) return head;
+        // List<Integer> ans=new ArrayList<>();
+        // ListNode temp=head;
+        // while(temp!=null && temp.next!=null){
+        //     ans.add(temp.val);
+        //     temp=temp.next.next;
         // }
-        // ListNode temp1=head;
-        // ListNode link1=head;
-        // ListNode temp2=head.next;
-        // ListNode ref=temp2;
-        // ListNode link2=head.next;
-        // while(temp1!=null && temp2!=null){
-        //     temp1=temp1.next.next;
-        //     link1.next=temp1;
-        //     if(temp1==null){
-        //         break;
-        //     }
-        //     link1=temp1;
-            
-        //     temp2=temp2.next.next;
-        //     link2.next=temp2;
-        //     link2=temp2;
+        // if(temp!=null) ans.add(temp.val);
+        // temp=head.next;
+        // while(temp!=null && temp.next!=null){
+        //     ans.add(temp.val);
+        //     temp=temp.next.next;
         // }
-        // link1.next=ref;
+        // if(temp!=null) ans.add(temp.val);
+        // temp=head;
+        // int i=0;
+        // while(temp!=null){
+        //     temp.val=ans.get(i);
+        //     i++;
+        //     temp=temp.next;
+        // }
         // return head;
+        
     }
 }
 
