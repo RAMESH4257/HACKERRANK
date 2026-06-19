@@ -12,22 +12,16 @@ class Node {
 
 class Solution {
     public Node intersectPoint(Node head1, Node head2) {
-        if(head1==null) return head2;
-        if(head2==null) return head1;
-       Set<Node> st=new HashSet<>();
-       Node temp=head1;
-       while(temp!=null){
-           st.add(temp);
-           temp=temp.next;
-       }
-       temp=head2;
-       while(temp!=null){
-           if(st.contains(temp)){
-               return temp;
-           }
-           temp=temp.next;
-       }
-       return null;
+         if(head1==null || head2==null) return null;
+        Node t1=head1,t2=head2;
+        while(t1!=t2){
+            t1=t1.next;
+            t2=t2.next;
+            if(t1==t2) return t1;
+            if(t1==null) t1=head2;
+            if(t2==null) t2=head1;
+        }
+        return t1;
         
     }
 }
