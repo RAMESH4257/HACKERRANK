@@ -9,45 +9,74 @@
  * }
  */
 class Solution {
-    static int[] reverse(int[] arr,int start,int end){
-        while(start<=end){
-            int temp=arr[start];
-            arr[start]=arr[end];
-            arr[end]=temp;
-            start++;
-            end--;
-        }
-        return arr;
-    }
-    public ListNode rotateRight(ListNode head, int k) {
-        if(head==null){
-            return head;
-        }
-        ListNode temp=head;
-        int c=0;
+    // static int[] reverse(int[] arr,int start,int end){
+    //     while(start<=end){
+    //         int temp=arr[start];
+    //         arr[start]=arr[end];
+    //         arr[end]=temp;
+    //         start++;
+    //         end--;a
+    //     }
+    //     return arr;
+    // }
+    public ListNode find(ListNode temp,int lim){
+        int c=1;
         while(temp!=null){
-          c++;
-          temp=temp.next;
-        }
-        int[] ans=new int[c];
-        temp=head;
-        int i=0;
-        while(temp!=null){
-            ans[i++]=temp.val;
+            if(c==lim){
+                break;
+            }
+            c++;
             temp=temp.next;
         }
-        int n=c;
-        k=k%n;
-        ans=reverse(ans,0,n-1);
-        ans=reverse(ans,0,k-1);
-        ans=reverse(ans,k,n-1);
-        ListNode dummy=new ListNode(0);
-        ListNode curr=dummy;
-        for(int j=0;j<ans.length;j++){
-            ListNode newnode=new ListNode(ans[j]);
-            curr.next=newnode;
-            curr=curr.next;
-        }
-        return dummy.next;
+        return temp;
+    }
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null || head.next==null || k==0) return head;
+       ListNode tail=head;
+       int c=1;
+       while(tail.next!=null){
+        c++;
+        tail=tail.next;
+       }
+       if(k%c==0) return head;
+       k=k%c;
+       tail.next=head;
+       ListNode newLastNode=find(head,c-k);
+       head=newLastNode.next;
+       newLastNode.next=null;
+       return head;
+        // if(head==null){
+        //     return head;
+        // }
+        // ListNode temp=head;
+        // int c=0;
+        // while(temp!=null){
+        //   c++;
+        //   temp=temp.next;
+        // }
+        // int[] ans=new int[c];
+        // temp=head;
+        // int i=0;
+        // while(temp!=null){
+        //     ans[i++]=temp.val;
+        //     temp=temp.next;
+        // }
+        // int n=c;
+        // k=k%n;
+        // ans=reverse(ans,0,n-1);
+        // ans=reverse(ans,0,k-1);
+        // ans=reverse(ans,k,n-1);
+        // ListNode dummy=new ListNode(0);
+        // ListNode curr=dummy;
+        // for(int j=0;j<ans.length;j++){
+        //     ListNode newnode=new ListNode(ans[j]);
+        //     curr.next=newnode;
+        //     curr=curr.next;
+        // }
+        // return dummy.next;
     }
 }
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
